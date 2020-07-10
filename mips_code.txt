@@ -1,0 +1,5 @@
+addi $13, $0, 2 // address of a
+addi $14, $0, 4 // address of b
+addi $15, $0, 8 // address of c
+nop
+clear 40960

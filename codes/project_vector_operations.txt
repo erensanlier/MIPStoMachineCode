@@ -1,0 +1,36 @@
+addi $13, $0, 0 // address of a
+addi $14, $0, 4 // address of b
+addi $15, $0, 8 // address of c
+addi $1, $0, 5
+sw $1, 0($13) // sw 5 -> a(0)
+addi $1, $0, 7
+sw $1, 1($13) // sw 7 -> a(1)
+addi $1, $0, -2
+sw $1, 2($13) // sw -2 -> a(2)
+addi $1, $0, 40
+sw $1, 3($13)  // sw 40 -> a(3)
+addi $1, $0, 65
+sw $1, 0($14) // sw 65 -> b(0)
+addi $1, $0, -23
+sw $1, 1($14)  // sw -23 -> b(1)
+addi $1, $0, 17
+sw $1, 2($14) // sw 17 -> b(2)
+addi $1, $0, 1024
+sw $1, 3($14) // sw 1024 -> b(3)
+addi $2, $0, 2 // set $2 to 2 for mult
+addi $4, $0, 0 //int i = 0
+addi $5, $0, 4 // to 4
+loop: // start the loop
+beq $4, $5, exit // if i = 4 branch to exit
+lw $6, 0($13) // load a(i)
+lw $7, 0($14) // load b(i)
+add $8, $6, $7 // [a(i) + b(i)]
+mult $2, $8 // 2 * [a(i) + b(i)]
+mflo $8 // load last 16 bits of mult
+sw $8, 0($15) // save mflo reg to c(i)
+addi $13, $13, 1
+addi $14, $14, 1
+addi $15, $15, 1 // address adjustments
+addi $4, $4, 1 //i++
+j loop // jump to loop
+exit:
